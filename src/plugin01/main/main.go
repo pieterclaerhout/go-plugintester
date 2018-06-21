@@ -1,11 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"plugin01/uuid"
+)
 
 type greeting string
 
 func (g greeting) Greet() {
-	fmt.Println("Hello Universe from plugin 1")
+	fmt.Println("Hello Universe from plugin 1 - " + uuid.UUID())
 }
 
 // exported as symbol named "Greeter"

@@ -21,7 +21,11 @@ clean:
 	rm -rf $(BINPATH)
 
 dep-init:
+	cd $(SRCPATH)/plugin01 && dep init
+	cd $(SRCPATH)/plugin02 && dep init
 	cd $(SRCPATH)/$(PKGNAME) && dep init
 
 dep-ensure:
+	cd $(SRCPATH)/plugin01 && dep ensure -v
+	cd $(SRCPATH)/plugin01 && dep ensure -v
 	cd $(SRCPATH)/$(PKGNAME) && dep ensure -v
