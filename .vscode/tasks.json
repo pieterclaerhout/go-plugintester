@@ -11,6 +11,13 @@
             "problemMatcher": ["$go"]
         },
         {
+            "label": "run",
+            "type": "shell",
+            "command": "make run",
+            "group": "build",
+            "problemMatcher": ["$go"]
+        },
+        {
             "label": "dep: init",
             "type": "shell",
             "command": "make dep-init",

@@ -1,15 +1,27 @@
 APPNAME := plugin-tester
 GOPATH := $(CURDIR)
+BINPATH := bin
+SRCPATH := src
+PLUGINPATH := $(BINPATH)/plugins
+PKGNAME := plugintester
 
 build:
-	go build -o $(APPNAME) plugintester/main
+	rm -rf $(PLUGINPATH)
+	mkdir -p $(PLUGINPATH)
+	go build -buildmode=plugin -o $(PLUGINPATH)/plugin01.so plugin01/main
+	go build -buildmode=plugin -o $(PLUGINPATH)/plugin02.so plugin02/main
+	go build -o $(BINPATH)/$(APPNAME) $(PKGNAME)/main
+
+run: build
+	@echo
+	@bin/$(APPNAME)
 
 clean:
 	rm -rf pkg
-	rm -f $(APPNAME)
+	rm -rf $(BINPATH)
 
 dep-init:
-	cd src/plugintester && dep init
+	cd $(SRCPATH)/$(PKGNAME) && dep init
 
 dep-ensure:
-	cd src/plugintester && dep ensure -v
+	cd $(SRCPATH)/$(PKGNAME) && dep ensure -v
